@@ -1,6 +1,8 @@
-# ecs
+# dowdiness/ecs
 
 Design documents and implementation scaffold for a MoonBit Entity-Component-System framework.
+
+Language: English | [日本語](./README.ja.md)
 
 ## Current Status
 

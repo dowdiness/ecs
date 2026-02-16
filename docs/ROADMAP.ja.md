@@ -1,5 +1,7 @@
 # Roadmap
 
+言語: [English](./ROADMAP.en.md) | 日本語
+
 ## 現在の実装状況
 
 2026年2月16日時点:

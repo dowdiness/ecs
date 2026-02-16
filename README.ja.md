@@ -1,6 +1,8 @@
-# ecs
+# dowdiness/ecs
 
 MoonBit 向け Entity-Component-System フレームワークの設計ドキュメントと実装スキャフォールド。
+
+言語: [English](./README.md) | 日本語
 
 ## 現在の実装状況
 

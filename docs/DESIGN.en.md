@@ -2,6 +2,8 @@
 
 Design decisions for a general-purpose ECS framework targeting MoonBit.
 
+Language: English | [日本語](./DESIGN.ja.md)
+
 ## Current Implementation Reality
 
 As of February 16, 2026, this design is forward-looking. The repository currently contains scaffold/template code and does not yet implement the ECS APIs described below.

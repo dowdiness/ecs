@@ -1,5 +1,7 @@
 # Roadmap
 
+Language: English | [日本語](./ROADMAP.ja.md)
+
 ## Current Implementation Reality
 
 As of February 16, 2026:

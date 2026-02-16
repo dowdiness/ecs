@@ -24,6 +24,15 @@ You can browse and install extra skills here:
 - Try to keep deprecated blocks in file called `deprecated.mbt` in each
   directory.
 
+### docs/TODO.md Maintenance
+
+`docs/TODO.md` tracks the current implementation progress. Always read it at the start of a session to understand where things stand.
+
+- After completing a task, check its box in `docs/TODO.md` (`- [x]`) and commit the update together with the implementation.
+- Do not delete completed tasks within an active Phase — they tell you what is already done and should not be re-implemented.
+- When an entire Phase is completed, collapse its individual tasks into a single line marked `Done: Phase N ✓`. This keeps the file short without losing the signal that the Phase is finished.
+- Always work on tasks in the order listed. Do not skip ahead to a later Phase.
+
 ## Tooling
 
 - `moon fmt` is used to format your code properly.

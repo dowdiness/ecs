@@ -4,6 +4,7 @@
   "readme": "README.mbt.md",
   "repository": "",
   "license": "Apache-2.0",
+  "no-parallelize": true,
   "keywords": [],
   "description": ""
 }

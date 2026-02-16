@@ -2,12 +2,69 @@
 package "dowdiness/ecs"
 
 // Values
+pub fn[A, B] each2(EntityManager, ComponentStore[A], ComponentStore[B], (EntityId, A, B) -> Unit) -> Unit
+
+pub fn[A, B, C] each3(EntityManager, ComponentStore[A], ComponentStore[B], ComponentStore[C], (EntityId, A, B, C) -> Unit) -> Unit
+
+pub fn[A, B, C, D] each4(EntityManager, ComponentStore[A], ComponentStore[B], ComponentStore[C], ComponentStore[D], (EntityId, A, B, C, D) -> Unit) -> Unit
+
+pub fn[A, B, C, D, E] each5(EntityManager, ComponentStore[A], ComponentStore[B], ComponentStore[C], ComponentStore[D], ComponentStore[E], (EntityId, A, B, C, D, E) -> Unit) -> Unit
+
+pub fn[A, B] join2(EntityManager, ComponentStore[A], ComponentStore[B]) -> Array[(EntityId, A, B)]
+
+pub fn[A, B, C] join3(EntityManager, ComponentStore[A], ComponentStore[B], ComponentStore[C]) -> Array[(EntityId, A, B, C)]
+
+pub fn[A, B, C, D] join4(EntityManager, ComponentStore[A], ComponentStore[B], ComponentStore[C], ComponentStore[D]) -> Array[(EntityId, A, B, C, D)]
+
+pub fn[A, B, C, D, E] join5(EntityManager, ComponentStore[A], ComponentStore[B], ComponentStore[C], ComponentStore[D], ComponentStore[E]) -> Array[(EntityId, A, B, C, D, E)]
 
 // Errors
 
 // Types and methods
+pub struct ComponentStore[T] {
+  data : Map[EntityId, T]
+}
+pub fn[T] ComponentStore::entities(Self[T]) -> Array[EntityId]
+pub fn[T] ComponentStore::get(Self[T], EntityId) -> T?
+pub fn[T] ComponentStore::has(Self[T], EntityId) -> Bool
+pub fn[T : SemilatticeMerge] ComponentStore::join_set(Self[T], EntityId, T) -> Unit
+pub fn[T] ComponentStore::length(Self[T]) -> Int
+pub fn[T] ComponentStore::new() -> Self[T]
+pub fn[T] ComponentStore::remove(Self[T], EntityId) -> T?
+pub fn[T] ComponentStore::set(Self[T], EntityId, T) -> Unit
+pub impl[T] ComponentRemover for ComponentStore[T]
+
+pub struct EntityId {
+  index : Int
+  generation : Int
+}
+pub impl Compare for EntityId
+pub impl Eq for EntityId
+pub impl Hash for EntityId
+pub impl Show for EntityId
+
+pub struct EntityManager {
+  mut next_index : Int
+  generations : Array[Int]
+  alive : Array[Bool]
+  free_list : Array[Int]
+  removers : Array[&ComponentRemover]
+}
+pub fn EntityManager::alive_entities(Self) -> Array[EntityId]
+pub fn EntityManager::despawn(Self, EntityId) -> Bool
+pub fn EntityManager::is_alive(Self, EntityId) -> Bool
+pub fn EntityManager::new() -> Self
+pub fn EntityManager::register_store(Self, &ComponentRemover) -> Unit
+pub fn EntityManager::spawn(Self) -> EntityId
 
 // Type aliases
 
 // Traits
+pub(open) trait ComponentRemover {
+  remove_component(Self, EntityId) -> Unit
+}
+
+pub(open) trait SemilatticeMerge {
+  join(Self, Self) -> Self
+}
 

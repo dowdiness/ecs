@@ -2,6 +2,10 @@
 
 MoonBit 向け汎用 ECS フレームワークの設計判断を記述する。
 
+## 現在の実装状況
+
+2026年2月16日時点で、この設計は将来向けの仕様であり、リポジトリ内の実装はスキャフォールド/テンプレート段階にとどまる。以下の API は未実装。
+
 ## 型消去しない
 
 Bevy や Aztecs 等の既存 ECS は `Map[TypeId, ErasedStorage]` で異なる型の Component を1つのコンテナに入れ、取り出し時に `downcast` で具体型に復元する。MoonBit には TypeId も downcast もないため、この方式は使えない。
@@ -126,7 +130,7 @@ ReactiveComponentStore[T]
 以下の **両方** が満たされたとき、案A（Entity×Component ごとの Signal）への移行を検討する:
 
 1. **需要側の条件**: 単一 Store の Entity 数が増加し、Memo の再計算（または検証）コストがフレームバジェットに対して支配的になった
-2. **供給側の条件**: incr に Subscriber Links と Signal GC が実装された（ROADMAP Phase 4 相当）
+2. **供給側の条件**: incr に Subscriber Links と Signal GC が実装された（ROADMAP の将来検討項目に相当）
 
 条件1だけでは移行できない（incr が動的 Signal のライフサイクル管理をサポートしていない）。条件2だけでは移行する動機がない（案C で十分なら複雑さを増やす必要がない）。
 

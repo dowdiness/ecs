@@ -1,44 +1,20 @@
 # ecs
 
-A general-purpose Entity-Component-System framework for MoonBit.
+Design documents and implementation scaffold for a MoonBit Entity-Component-System framework.
 
-## Features
+## Current Status
 
-- **No type erasure** — ComponentStores are independently typed fields. No casts, no downcast, full compile-time safety.
-- **Reactive change detection** — Optional integration with [incr](https://github.com/dowdiness/incr) for Signal/Memo-based incremental computation with backdating.
-- **CRDT-extensible** — Causal clock and operation log primitives for collaborative editing via egwalker.
+As of February 16, 2026, this repository is still at scaffold stage:
 
-## Quick Start
+- The root package currently exports no ECS APIs.
+- `cmd/main` is a template executable that prints `Hello`.
+- `EntityManager`, `ComponentStore`, `joinN`, reactive APIs, and CRDT APIs are planned but not implemented yet.
 
-Define your own World struct with the components you need:
+## Planned Architecture (Design Target)
 
-```moonbit
-struct MyWorld {
-  entities : @ecs.EntityManager
-  positions : @ecs.ComponentStore[Vec2]
-  velocities : @ecs.ComponentStore[Vec2]
-}
-
-fn main {
-  let world = MyWorld::{
-    entities: @ecs.EntityManager::new(),
-    positions: @ecs.ComponentStore::new(),
-    velocities: @ecs.ComponentStore::new(),
-  }
-
-  let e = world.entities.spawn()
-  world.positions.set(e, Vec2::{ x: 0.0, y: 0.0 })
-  world.velocities.set(e, Vec2::{ x: 1.0, y: 2.0 })
-
-  @ecs.each2(world.entities, world.positions, world.velocities,
-    fn(entity, pos, vel) {
-      println("\{entity}: \{pos} + \{vel}")
-    }
-  )
-}
-```
-
-Systems are plain functions — the framework does not impose a special type or trait.
+- **No type erasure**: ComponentStores as independently typed fields
+- **Reactive change detection**: optional integration with [incr](https://github.com/dowdiness/incr)
+- **CRDT-extensible model**: causal clock and operation log primitives
 
 ## Install
 
@@ -46,10 +22,14 @@ Systems are plain functions — the framework does not impose a special type or 
 moon add dowdiness/ecs
 ```
 
+The package can be added, but there is no stable public ECS API yet.
+
 ## Documentation
 
-- [DESIGN.md](./DESIGN.md) — Design decisions: why no type erasure, Signal granularity (Option C), execution model contracts, migration path
-- [ROADMAP.md](./ROADMAP.md) — Implementation phases, what each phase provides, test items, future considerations
+- [Design (English)](./docs/DESIGN.en.md)
+- [Design (Japanese)](./docs/DESIGN.ja.md)
+- [Roadmap (English)](./docs/ROADMAP.en.md)
+- [Roadmap (Japanese)](./docs/ROADMAP.ja.md)
 
 ## License
 

@@ -1,44 +1,20 @@
 # ecs
 
-MoonBit 向け汎用 Entity-Component-System フレームワーク。
+MoonBit 向け Entity-Component-System フレームワークの設計ドキュメントと実装スキャフォールド。
 
-## 特徴
+## 現在の実装状況
 
-- **型消去なし** — ComponentStore は独立した型付きフィールド。キャストなし、downcast なし、完全なコンパイル時型安全性。
-- **リアクティブ変更検出** — [incr](https://github.com/dowdiness/incr) との統合により、Signal/Memo ベースのインクリメンタル計算と Backdating をサポート。
-- **CRDT 拡張可能** — 因果クロックと操作ログにより egwalker 経由の協調編集に対応。
+2026年2月16日時点で、このリポジトリはスキャフォールド段階:
 
-## クイックスタート
+- ルートパッケージは ECS API をまだ公開していない
+- `cmd/main` は `Hello` を出力するテンプレート実行ファイル
+- `EntityManager`、`ComponentStore`、`joinN`、リアクティブ API、CRDT API は設計段階で未実装
 
-必要な Component を持つ World struct を定義する:
+## 目標アーキテクチャ（設計）
 
-```moonbit
-struct MyWorld {
-  entities : @ecs.EntityManager
-  positions : @ecs.ComponentStore[Vec2]
-  velocities : @ecs.ComponentStore[Vec2]
-}
-
-fn main {
-  let world = MyWorld::{
-    entities: @ecs.EntityManager::new(),
-    positions: @ecs.ComponentStore::new(),
-    velocities: @ecs.ComponentStore::new(),
-  }
-
-  let e = world.entities.spawn()
-  world.positions.set(e, Vec2::{ x: 0.0, y: 0.0 })
-  world.velocities.set(e, Vec2::{ x: 1.0, y: 2.0 })
-
-  @ecs.each2(world.entities, world.positions, world.velocities,
-    fn(entity, pos, vel) {
-      println("\{entity}: \{pos} + \{vel}")
-    }
-  )
-}
-```
-
-System はただの関数。フレームワークが特別な型や trait を要求することはない。
+- **型消去なし**: ComponentStore を独立した型付きフィールドで保持
+- **リアクティブ変更検出**: [incr](https://github.com/dowdiness/incr) との統合を想定
+- **CRDT 拡張**: 因果クロックと操作ログの導入を想定
 
 ## インストール
 
@@ -46,10 +22,14 @@ System はただの関数。フレームワークが特別な型や trait を要
 moon add dowdiness/ecs
 ```
 
+追加は可能だが、現時点では安定した公開 ECS API はない。
+
 ## ドキュメント
 
-- [DESIGN.md](./DESIGN.md) — 設計判断: 型消去しない理由、Signal 粒度 (案C)、実行モデルの契約、移行パス
-- [ROADMAP.md](./ROADMAP.md) — 実装フェーズ、各フェーズの提供物、テスト項目、将来の検討事項
+- [Design (English)](./docs/DESIGN.en.md)
+- [Design (Japanese)](./docs/DESIGN.ja.md)
+- [Roadmap (English)](./docs/ROADMAP.en.md)
+- [Roadmap (Japanese)](./docs/ROADMAP.ja.md)
 
 ## ライセンス
 

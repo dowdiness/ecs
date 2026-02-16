@@ -2,6 +2,10 @@
 
 Design decisions for a general-purpose ECS framework targeting MoonBit.
 
+## Current Implementation Reality
+
+As of February 16, 2026, this design is forward-looking. The repository currently contains scaffold/template code and does not yet implement the ECS APIs described below.
+
 ## No Type Erasure
 
 Existing ECS frameworks like Bevy and Aztecs use `Map[TypeId, ErasedStorage]` to store different component types in a single container, recovering concrete types via `downcast` at retrieval time. MoonBit has neither TypeId nor downcast, so this approach is not possible.

@@ -1,5 +1,13 @@
 # Roadmap
 
+## 現在の実装状況
+
+2026年2月16日時点:
+
+- リポジトリはスキャフォールド/テンプレート段階
+- ルートパッケージは ECS API をまだ公開していない
+- このロードマップに記載された API はすべて設計上の目標で、現時点の実装ではない
+
 ## 概要
 
 ```
@@ -8,7 +16,7 @@ Phase 2: incr 統合         incr に依存
 Phase 3: CRDT 基盤         incr に依存
 ```
 
-incr ライブラリ (https://github.com/dowdiness/incr) の on_change 通知は実装済み。
+incr ライブラリ (https://github.com/dowdiness/incr) の `on_change` 通知連携は計画中であり、このリポジトリでは未実装。
 
 ---
 
@@ -103,6 +111,6 @@ egwalker 統合のための操作ログと因果クロック。
 
 ## 将来の検討事項
 
-- **incr Subscriber Links → 案A 移行**: incr に GC 付き Subscriber Links が実装され、かつ単一 Store の Entity 数増加で Memo 検証コストが支配的になった場合、案A（Entity×Component ごとの Signal）に移行可能。外部 API は不変。移行基準の詳細は DESIGN.md を参照
+- **incr Subscriber Links → 案A 移行**: incr に GC 付き Subscriber Links が実装され、かつ単一 Store の Entity 数増加で Memo 検証コストが支配的になった場合、案A（Entity×Component ごとの Signal）に移行可能。外部 API は不変。移行基準の詳細は `DESIGN.ja.md` を参照
 - **System 間の依存グラフ解析と並列実行**: 初期は順次実行。必要になった段階で追加
 - **egwalker パッケージとの本格統合**: Phase 3 は ECS 側の受け口のみ。egwalker 側のプロトコル実装は別リポジトリ

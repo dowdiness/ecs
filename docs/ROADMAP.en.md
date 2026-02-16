@@ -1,5 +1,13 @@
 # Roadmap
 
+## Current Implementation Reality
+
+As of February 16, 2026:
+
+- The repository is still at scaffold/template stage.
+- The root package exports no ECS APIs yet.
+- All APIs listed in this roadmap are planned targets, not currently implemented behavior.
+
 ## Overview
 
 ```
@@ -8,7 +16,7 @@ Phase 2: incr Integration      Depends on incr
 Phase 3: CRDT Foundation       Depends on incr
 ```
 
-The incr library's (https://github.com/dowdiness/incr) on_change notification is already implemented.
+Integration with incr's `on_change` notification is planned, but not implemented in this repository yet.
 
 ---
 
@@ -103,6 +111,6 @@ Operation log and causal clock for egwalker integration.
 
 ## Future Considerations
 
-- **incr Subscriber Links → Option A migration**: When incr implements Subscriber Links with GC and the entity count in a single store grows enough that Memo verification cost becomes dominant, migration to Option A (one Signal per Entity×Component) becomes possible. External API remains unchanged. See DESIGN.md for detailed migration criteria
+- **incr Subscriber Links → Option A migration**: When incr implements Subscriber Links with GC and the entity count in a single store grows enough that Memo verification cost becomes dominant, migration to Option A (one Signal per Entity×Component) becomes possible. External API remains unchanged. See `DESIGN.en.md` for detailed migration criteria
 - **System dependency graph analysis and parallel execution**: Sequential execution initially. Added when needed
 - **Full egwalker integration**: Phase 3 provides only the ECS-side interface. The egwalker protocol implementation lives in a separate repository

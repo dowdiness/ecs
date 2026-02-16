@@ -1,0 +1,7 @@
+// import {
+//   "dowdiness/ecs" @lib,
+// }
+
+options(
+  "is-main": true,
+)
